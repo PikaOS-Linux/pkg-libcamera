@@ -1,22 +1,18 @@
 Source: libcamera
 Priority: optional
-Maintainer: Sourav Das <souravdas142@gmail.com>
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
 XSBC-Original-Maintainer: Debian Multimedia Maintainers <debian-multimedia@lists.debian.org>
 Uploaders: Emmanuel Arias <emmanuelarias30@gmail.com>,
            IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>,
            Andrej Shadura <andrewsh@debian.org>,
            Dylan Aïssi <daissi@debian.org>
-Build-Depends: debhelper-compat (= 12),
-               dh-exec,
-               cmake,
+Build-Depends: debhelper-compat (= 13),
+               dh-sequence-python3,
                doxygen <!nodoc>,
-               doxygen-latex <!nodoc>,
+               doxygen-latex [!sh4] <!nodoc> | texlive-latex-extra <!nodoc>,
                graphviz <!nodoc>,
-               libboost-dev,
-               libdrm-dev,
                libdw-dev <!pkg.libcamera.notrace>,
                libevent-dev,
-               libexif-dev,
                libgnutls28-dev | gnutls-dev,
                libgstreamer-plugins-base1.0-dev,
                libgstreamer1.0-dev,
@@ -25,29 +21,22 @@ Build-Depends: debhelper-compat (= 12),
                libjs-jquery <!nodoc>,
                libjs-sphinxdoc <!nodoc>,
                libjs-underscore <!nodoc>,
-               liblttng-ust-dev [linux-any],
+               liblttng-ust-dev [!i386],
+               libpython3-dev <!pkg.libcamera.nopython>,
                libsdl2-dev <!pkg.libcamera.nosdl>,
-               libsdl2-image-dev,
                libtiff-dev,
                libudev-dev [linux-any],
-               libunwind-dev,
                libyaml-dev,
-               lttng-tools,
                meson (>= 0.56),
                openssl,
                pkgconf | pkg-config,
-               python3:native,
                python3-jinja2,
                python3-ply,
+               python3-pybind11 <!pkg.libcamera.nopython>,
                python3-sphinx <!nodoc>,
                python3-yaml,
-               qtbase5-dev <!pkg.libcamera.noqt>,
-               libqt5core5a,
-               libqt5gui5,
-               libqt5widgets5,
-               qttools5-dev-tools,
-               texlive-latex-extra,
-Standards-Version: 4.5.1
+               qtbase5-dev <!pkg.libcamera.noqt>
+Standards-Version: 4.6.2
 Rules-Requires-Root: no
 Section: libs
 Homepage: https://libcamera.org/
@@ -57,7 +46,7 @@ Vcs-Git: https://salsa.debian.org/multimedia-team/libcamera.git
 Package: libcamera-dev
 Section: libdevel
 Architecture: any
-Depends: libcamera0.0.5 (= ${binary:Version}),
+Depends: libcamera0.1 (= ${binary:Version}),
          ${misc:Depends},
          ${shlibs:Depends}
 Multi-Arch: same
@@ -86,7 +75,7 @@ Description: complex camera support library (documentation)
  .
  This package contains the documentation developing with libcamera.
 
-Package: libcamera0.0.5
+Package: libcamera0.1
 Architecture: any
 Depends: ${misc:Depends},
          ${shlibs:Depends}
@@ -155,3 +144,16 @@ Description: complex camera support library (GStreamer plugin)
  programming interface to the applications.
  .
  This package contains the libcamera GStreamer plugin.
+
+Package: python3-libcamera
+Section: python
+Architecture: any
+Depends: ${misc:Depends},
+         ${python3:Depends},
+         ${shlibs:Depends},
+Description: complex camera support library (Python bindings)
+ libcamera is a complex camera support library which handles low-level
+ control of the camera devices, providing a unified higher-level
+ programming interface to the applications.
+ .
+ This package contains the libcamera Python bindings.
