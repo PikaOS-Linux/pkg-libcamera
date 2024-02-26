@@ -1,7 +1,6 @@
 Source: libcamera
 Priority: optional
-Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
-XSBC-Original-Maintainer: Debian Multimedia Maintainers <debian-multimedia@lists.debian.org>
+Maintainer: Debian Multimedia Maintainers <debian-multimedia@lists.debian.org>
 Uploaders: Emmanuel Arias <emmanuelarias30@gmail.com>,
            IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>,
            Andrej Shadura <andrewsh@debian.org>,
@@ -22,7 +21,7 @@ Build-Depends: debhelper-compat (= 13),
                libjs-jquery <!nodoc>,
                libjs-sphinxdoc <!nodoc>,
                libjs-underscore <!nodoc>,
-               liblttng-ust-dev [!i386],
+               liblttng-ust-dev [linux-any],
                libpython3-dev <!pkg.libcamera.nopython>,
                libsdl2-dev <!pkg.libcamera.nosdl>,
                libtiff-dev,
